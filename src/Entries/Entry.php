@@ -635,7 +635,7 @@ class Entry implements Arrayable, ArrayAccess, Augmentable, BulkAugmentable, Con
 
     public function sites()
     {
-        return $this->collection()->sites();
+        return $this->collection()?->sites();
     }
 
     public function fileData()
