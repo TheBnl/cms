@@ -141,7 +141,7 @@ class LocalizedTerm implements Arrayable, ArrayAccess, Augmentable, BulkAugmenta
 
     protected function defaultLocale()
     {
-        return $this->taxonomy()->sites()->first();
+        return $this->taxonomy()?->sites()->first() ?? App::getLocale();
     }
 
     public function inDefaultLocale()
