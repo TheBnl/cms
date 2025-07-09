@@ -2,6 +2,7 @@
 
 namespace Statamic\Taxonomies;
 
+use Illuminate\Support\Facades\App;
 use Statamic\Contracts\Taxonomies\Term as TermContract;
 use Statamic\Data\ExistsAsFile;
 use Statamic\Data\HasDirtyState;
@@ -149,7 +150,7 @@ class Term implements TermContract
 
     public function defaultLocale()
     {
-        return $this->taxonomy()->sites()->first();
+        return $this->taxonomy()?->sites()->first() ?? App::getLocale();
     }
 
     public function localizations()
