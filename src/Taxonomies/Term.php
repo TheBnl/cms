@@ -97,7 +97,7 @@ class Term implements TermContract
                     return Blink::get($key);
                 }
 
-                $blueprint = $this->taxonomy()->termBlueprint($blueprint ?? $this->value('blueprint'), $this);
+                $blueprint = $this->taxonomy()?->termBlueprint($blueprint ?? $this->value('blueprint'), $this);
 
                 Blink::put($key, $blueprint);
 
