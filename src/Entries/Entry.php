@@ -607,7 +607,7 @@ class Entry implements Arrayable, ArrayAccess, Augmentable, BulkAugmentable, Con
 
     public function hasDate()
     {
-        return $this->collection()->dated();
+        return $this->collection()?->dated();
     }
 
     public function hasTime()
