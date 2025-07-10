@@ -99,11 +99,11 @@ class Term implements TermContract
                 }
 
                 $blueprint = $this->taxonomy()?->termBlueprint($blueprint ?? $this->value('blueprint'), $this);
-
-                Blink::put($key, $blueprint);
-
-                TermBlueprintFound::dispatch($blueprint, $this);
-
+                if ($blueprint) {
+                    Blink::put($key, $blueprint);
+                    TermBlueprintFound::dispatch($blueprint, $this);
+                }
+                
                 return $blueprint;
             })
             ->setter(function ($blueprint) use ($key) {
