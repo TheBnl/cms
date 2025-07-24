@@ -304,16 +304,39 @@ class Replicator extends Fieldtype
         GraphQL::addType($union);
     }
 
+    public function filterGqlNames(array $path)
+    {
+        $filter = [
+            'blocks_spring' => 'blocks',
+            'blocks_summer' => 'blocks',
+            'blocks_fall' => 'blocks',
+            'blocks_winter' => 'blocks',
+        ];
+
+        foreach ($filter as $find => $replace) {
+            $index = array_search($find, $path);
+            if ($index !== false) {
+                $path[$index] = $replace;
+            }
+        }
+
+        return $path;
+    }
+ 
     protected function gqlSetTypeName($set)
     {
-        return 'Set_'.collect($this->field->handlePath())->map(function ($part) {
+        $path = $this->field->handlePath();
+        $path = $this->filterGqlNames($path);
+        return 'Set_'.collect($path)->map(function ($part) {
             return Str::studly($part);
         })->join('_').'_'.Str::studly($set);
     }
 
     protected function gqlSetsTypeName()
     {
-        return 'Sets_'.collect($this->field->handlePath())->map(function ($part) {
+        $path = $this->field->handlePath();
+        $path = $this->filterGqlNames($path);
+        return 'Sets_'.collect($path)->map(function ($part) {
             return Str::studly($part);
         })->join('_');
     }
