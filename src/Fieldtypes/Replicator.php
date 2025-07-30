@@ -306,12 +306,7 @@ class Replicator extends Fieldtype
 
     public function filterGqlNames(array $path)
     {
-        $filter = [
-            'blocks_spring' => 'blocks',
-            'blocks_summer' => 'blocks',
-            'blocks_fall' => 'blocks',
-            'blocks_winter' => 'blocks',
-        ];
+        $filter = config('just.filter_replicator_gql_names', []);
 
         foreach ($filter as $find => $replace) {
             $index = array_search($find, $path);
